@@ -1,8 +1,18 @@
 FactoryGirl.define do
   factory :registration do
-    valid_from "2015-05-07"
-    valid_till "2015-08-07"
-    paid false
+    valid_from (Date.current)
+    valid_till (Date.current + 3.months)
+    paid true
+
+    factory :payment_pending do
+      paid false
+    end
+
+    factory :expired_registration do
+      valid_from (Date.current - 3.months - 1.day)
+      valid_till (Date.current - 1.day)
+    end
+    
   end
 
 end

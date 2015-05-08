@@ -6,3 +6,7 @@ default: &default
 development:
   <<: *default
   database: dog_rego_rails_dev
+
+test:
+  <<: *default
+  database: dog_rego_rails_test
