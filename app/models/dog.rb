@@ -1,3 +1,8 @@
 class Dog < ActiveRecord::Base
-  has_one :owner
+  belongs_to :owner, class_name: "User"
+  has_many :registrations
+
+  def age
+    Date.current.year - self.date_of_birth.year
+  end
 end
