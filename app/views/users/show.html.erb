@@ -1,0 +1,22 @@
+
+<%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-danger pull-right' %>
+
+<h2>Details</h2>
+<%= link_to 'Edit Details', edit_user_registration_path, class: 'btn btn-default' %>
+
+<%= @user.first_name %>
+<%= @user.last_name %>
+<%= @user.email %>
+<%= @user.postal_address_formatted %>
+
+<h3>Dogs</h3>
+<%= link_to 'Register a new dog', new_user_dog_path(@user), class: 'btn btn-default' %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <% @user.dogs.each do %>
+      <%= dog.name %>
+    <% end %>
+  </table>
+</div>
+
+
