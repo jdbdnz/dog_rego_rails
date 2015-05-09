@@ -32,15 +32,12 @@ gem 'pundit'
 # Authentication
 gem 'devise'
 
-# Bootstrap with sass
-gem 'bootstrap-sass'
-# Generates all browser specific prefixed CSS on compliation
-gem 'autoprefixer-rails'
 # Simple form makes forms simple!
 gem 'simple_form'
 
 # Gem I developed myself to make notification abstraction easy
 gem 'nofly', path: '../gems/nofly'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -50,6 +47,13 @@ gem 'nofly', path: '../gems/nofly'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Bootstrap with sass
+gem 'bootstrap-sass'
+# Generates all browser specific prefixed CSS on compliation
+gem 'autoprefixer-rails'
+# backwards compatibility of modern web standards
+gem 'modernizr-rails', '~> 2.7.1'
 
 group :development, :test do
   gem 'pry-rails'
