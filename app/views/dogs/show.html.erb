@@ -23,6 +23,9 @@
 </h4>
 <br />
 <p>
+  Born <%= format_date @dog.date_of_birth %>, <%= @dog.age %> years old
+</p>
+<p>
   First registered on <%= format_date @dog.created_at %>
 </p>
 <hr />
@@ -32,7 +35,7 @@
   <div class="col-xs-12 text-right">
     <h3 class="pull-left"><span class="hidden-xs">Registration </span>History</h3>
     <br />
-    <%= link_to "Renew", edit_user_dog_path(@user, @dog), class: 'btn btn-default' %>
+    <%= link_to "Renew", new_user_dog_registration_path(@user, @dog), class: 'btn btn-default' %>
   </div>
 </div>
 <br />
@@ -45,7 +48,7 @@
       <th>Fee</th>
       <th class="text-center">Payment Received</th>
     </tr>
-    <% @dog.registrations.each do |registration| %>
+    <% @dog.registrations.by_expiry_date.reverse.each do |registration| %>
       <tr class="<%= "active" if registration.current? %>" >
         <td><%= registration.id %></td>
         <td><%= format_date registration.valid_from %></td>

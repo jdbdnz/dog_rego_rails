@@ -1,0 +1,5 @@
+<%= bootstrap_form_for(@registration, url: user_dog_registrations_path, html: {  method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :registration_length, input_html: { name: 'registration_length' }, label: "Registration Renewal for #{@dog.name}", allow_blank: false, as: :radio_buttons, collection: Registration::REGISTRATION_PERIOD_PRICES.map {|v,k| ["#{v} Months for $#{k}, valid till #{ format_date(DateTime.current + v.months) }", v] } %>
+  <%= f.button :submit, "Renew", class: "col-xs-12 btn btn-info" %>
+<% end %>

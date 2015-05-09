@@ -1,5 +1,6 @@
 class DogsController < ApplicationController
-  
+  before_filter :authenticate_user!
+
   before_filter :load_user
   before_filter :load_dog, only: [:show, :edit, :update]
 
@@ -35,7 +36,7 @@ class DogsController < ApplicationController
       flash[:alert] = "\"#{@dog.name}\" is already registered to you. Did you mean to renew their registration instead?"
     else
       Registration.create({
-        dog: @dog,
+        dog: @dog = Dog.create(dog_params) ,
         valid_from: Date.current,
         valid_till: Date.current.advance(months: registration_period),
         fee: Registration::REGISTRATION_PERIOD_PRICES[registration_period]
@@ -45,22 +46,6 @@ class DogsController < ApplicationController
     render 'new' and return unless valid
     flash[:notice] = "Success! \"#{@dog.name}\" has been registered for the next #{registration_period} months. Please follow payment instructions below."
     redirect_to user_dog_path(@user,@dog)
-  end
-
-  private
-
-  def load_dog
-    @dog = Dog.find params[:id]
-  end
-
-  def load_user
-    @user = User.find params[:user_id]
-  end
-
-  def dog_params
-    dog_attr = params.require(:dog).permit(:name, :breed, :date_of_birth)
-    dog_attr[:owner_id] = @user.id
-    dog_attr
   end
 
 end

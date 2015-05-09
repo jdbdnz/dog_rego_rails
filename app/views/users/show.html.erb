@@ -36,17 +36,11 @@
     </tr>
     <% @user.dogs.each do |dog| %>
       <tr>
-        <td><%= dog.id %></td>
-        <td><%= dog.name %></td>
+        <td><%= link_to dog.id, user_dog_path(@user, dog) %></td>
+        <td><%= link_to dog.name, user_dog_path(@user, dog)  %></td>
         <td><%= dog.age %></td>
         <td class="text-center">
-          <% if dog.registration_status == Dog::STATUS_REGISTERED %>
-            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-          <% elsif dog.registration_status == Dog::STATUS_PENDING_PAYMENT %>
-            <span class="glyphicon glyphicon-exclamation-sign text-warning" aria-hidden="true"></span>
-          <% elsif dog.registration_status == Dog::STATUS_NOT_REGISTERED %>
-            <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
-          <% end %>
+          <a class="glyphicon <%= dog_status_glyphicon dog %> text-success" data-trigger="hover" aria-hidden="true"  data-container="body" data-toggle="popover" data-placement="left" data-content="<%= dog.registration_status %>"></a>
         </td>
       </tr>
     <% end %>

@@ -3,7 +3,7 @@
   <div class="col-xs-12 col-sm-6">
     <h2>Register a new dog</h2>
 
-    <%= bootstrap_form_for(@dog, url: user_dogs_path(@dog.owner), html: {  method: :post }) do |f| %>
+    <%= bootstrap_form_for(@dog, url: user_dogs_path, html: {  method: :post }) do |f| %>
       <%= f.error_notification %>
       <%= f.input :name %>
       <%= f.input :breed %>
@@ -19,12 +19,15 @@
       <p class="hidden-xs">
         <br /><br /><br />
       </p>
-      <p class="col-xs-12">
+      <p class="col-xs-12 strong">
         Has your dog been registered before?
       </p>
-      <br />
-      <br />
-      <%= link_to "Renew", new_user_registration_path, class: 'btn btn-lg btn-primary'  %>
+      <% @user.dogs.sort_by{|d| d.current_registration? ? 1 : 0 }.each do |dog| %>
+        <%= link_to new_user_dog_registration_path(@user, dog), class: 'btn btn-lg btn-success col-xs-12 margin-10' do %>
+          Renew <%= dog.name %> 
+          <span class="glyphicon <%= dog_status_glyphicon dog %> pull-right" data-trigger="hover" aria-hidden="true"  data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%= dog.registration_status %>"></span>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 

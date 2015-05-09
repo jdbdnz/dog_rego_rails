@@ -32,13 +32,8 @@ class Dog < ActiveRecord::Base
 
   def suggested_registration_length
     if registrations.present?
-      # calculate months of registration previously selected
-      from = registrations.last.valid_from
-      till = registrations.last.valid_till
-      month = (till.year * 12 + till.month) - (from.year * 12 + from.month)
-      month.divmod(12)[1]
+      registrations.last.registration_length
     else
-      # or select first option
       Registration::REGISTRATION_PERIOD_PRICES.first[0]
     end
   end
@@ -50,5 +45,14 @@ class Dog < ActiveRecord::Base
   def fees_owing
     registrations.unpaid.map(&:fee).sum
   end
+
+  def new_registration_valid_from
+    return Date.current unless registrations.present?
+    registrations.by_expiry_date.last.valid_till
+  end
   
+  def to_param
+    name.downcase
+  end
+
 end

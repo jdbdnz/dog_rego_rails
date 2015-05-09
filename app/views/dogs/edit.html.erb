@@ -1,6 +1,6 @@
 <h2>Edit <%= @dog.name %></h2>
 
-<%= bootstrap_form_for(@dog, url: user_dog_path(@user, @dog), html: {  method: :put }) do |f| %>
+<%= bootstrap_form_for(@dog, url: user_dog_path, html: {  method: :put }) do |f| %>
   <%= f.error_notification %>
   <%= f.input :name %>
   <%= f.input :breed %>
