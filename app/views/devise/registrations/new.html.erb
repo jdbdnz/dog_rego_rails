@@ -23,8 +23,7 @@
       <%= f.input :postal_address, required: true, as: :string %>
       <%= f.input :password, required: true, placeholder: ("#{@minimum_password_length} characters minimum" if @validatable) %>
       <%= f.input :confirm_password, required: true %>
-
-       <%= f.button :submit, "Sign up", class: 'col-xs-12 btn btn-info' %>
+      <%= f.button :submit, "Sign up", class: 'col-xs-12 btn btn-info' %>
 
     <% end %>
   </div>

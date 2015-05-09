@@ -1,20 +1,54 @@
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <h1 class="pull-left">
+      <%= @user.name %>
+    </h1>
+    <br />
+    <%= link_to 'Settings', edit_user_registration_path, class: 'btn btn-default' %>
+    <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+  </div>
+</div>
 
-<%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-danger pull-right' %>
+<p class="alert alert-info">
+  <%= @user.email %>
+  <br />
+  <%= @user.postal_address_formatted %>
+</p>
+<hr />
+<br />
 
-<h2>Details</h2>
-<%= link_to 'Edit Details', edit_user_registration_path, class: 'btn btn-default' %>
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <h3 class="pull-left">Dogs</h3>
+    <br />
+    <%= link_to 'Register a new dog', new_user_dog_path(@user), class: 'btn btn-default' %>
+  </div>
+</div>
+<br />
 
-<%= @user.first_name %>
-<%= @user.last_name %>
-<%= @user.email %>
-<%= @user.postal_address_formatted %>
-
-<h3>Dogs</h3>
-<%= link_to 'Register a new dog', new_user_dog_path(@user), class: 'btn btn-default' %>
 <div class="table-responsive">
   <table class="table table-striped">
-    <% @user.dogs.each do %>
-      <%= dog.name %>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th class="text-center">Registered</th>
+    </tr>
+    <% @user.dogs.each do |dog| %>
+      <tr>
+        <td><%= dog.id %></td>
+        <td><%= dog.name %></td>
+        <td><%= dog.age %></td>
+        <td class="text-center">
+          <% if dog.registration_status == Dog::STATUS_REGISTERED %>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+          <% elsif dog.registration_status == Dog::STATUS_PENDING_PAYMENT %>
+            <span class="glyphicon glyphicon-exclamation-sign text-warning" aria-hidden="true"></span>
+          <% elsif dog.registration_status == Dog::STATUS_NOT_REGISTERED %>
+            <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+          <% end %>
+        </td>
+      </tr>
     <% end %>
   </table>
 </div>
