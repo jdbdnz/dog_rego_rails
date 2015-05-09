@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :registration do
+    dog         { |i| i.association(:dog) }
+
     valid_from (Date.current)
     valid_till (Date.current + 3.months)
     paid true

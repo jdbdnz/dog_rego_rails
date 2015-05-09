@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :dog do
     owner         { |i| i.association(:user) }
-    registrations { |i| [i.association(:expired_registration), i.association(:registration)] }
 
     name 'Log'
     breed 'Oak'
