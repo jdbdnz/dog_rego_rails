@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :dogs, foreign_key: :owner_id
   has_many :registrations, through: :dogs
 
+  validates_presence_of :first_name, :last_name, :postal_address, :email
+  validates_uniqueness_of :email, case_sensitive: false
+
   def name
     "#{first_name} #{last_name}"
   end

@@ -1,6 +1,26 @@
 class Dog < ActiveRecord::Base
+  
   belongs_to :owner, class_name: "User"
   has_many :registrations
+
+  validates_presence_of :name, :owner_id, :breed, :date_of_birth
+  validates_uniqueness_of :name, scope: :owner_id, case_sensitive: false
+
+  STATUS_NOT_REGISTERED = "Not Registered"
+  STATUS_REGISTERED = "Registered"
+  STATUS_PENDING_PAYMENT = "Pending Payment"
+
+  def registration_status
+    unless current_registration?
+      STATUS_NOT_REGISTERED
+    else
+      if current_registration.paid?
+        STATUS_REGISTERED
+      else
+        STATUS_PENDING_PAYMENT
+      end
+    end
+  end
 
   def age
     Date.current.year - self.date_of_birth.year
@@ -10,8 +30,25 @@ class Dog < ActiveRecord::Base
     registrations.current.first
   end
 
+  def suggested_registration_length
+    if registrations.present?
+      # calculate months of registration previously selected
+      from = registrations.last.valid_from
+      till = registrations.last.valid_till
+      month = (till.year * 12 + till.month) - (from.year * 12 + from.month)
+      month.divmod(12)[1]
+    else
+      # or select first option
+      Registration::REGISTRATION_PERIOD_PRICES.first[0]
+    end
+  end
+
   def current_registration?
     current_registration.present?
+  end
+
+  def fees_owing
+    registrations.unpaid.map(&:fee).sum
   end
   
 end
