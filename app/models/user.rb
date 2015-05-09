@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   serialize :postal_address
 
-  has_many :dogs
+  has_many :dogs, foreign_key: :owner_id
   has_many :registrations, through: :dogs
 
   def postal_address_formatted
