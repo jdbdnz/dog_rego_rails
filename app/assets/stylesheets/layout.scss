@@ -2,7 +2,30 @@
   margin-top: 80px;
   text-align: center;
 }
+
 label abbr {
+  // required * on the right of labels rather than the default left
   float: right;
   margin-left: 5px;
+}
+
+input.radio_buttons {
+  // overrides bootstrap to stop the buttons from moving on change
+  height: auto;
+  width: auto;
+}
+
+.date.form-group {
+  label {
+    width: 100%;
+    float: left;
+  }
+  select {
+    width: 30%;
+    margin-right: 5%;
+    float: left;
+  }
+  :last-child {
+    margin-right: 0;
+  }
 }
