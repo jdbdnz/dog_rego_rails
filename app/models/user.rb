@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   has_many :dogs, foreign_key: :owner_id
   has_many :registrations, through: :dogs
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def postal_address_formatted
     if postal_address.is_a? String
       # user continued without selecting a geocoded suggestion
