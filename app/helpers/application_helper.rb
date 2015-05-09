@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def bank_account
+    "12-1234-1234-01"
+  end
+
   def horizontal_form_for(*params, &block)
     params[1][:html] = Hash.new if params[1][:html].nil?
     params[1][:html][:class] = 'form-horizontal'

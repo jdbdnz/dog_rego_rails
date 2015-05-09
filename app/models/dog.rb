@@ -46,9 +46,12 @@ class Dog < ActiveRecord::Base
     registrations.unpaid.map(&:fee).sum
   end
 
+  def registered_until
+    registrations.by_expiry_date.last.valid_till if registrations.present? 
+  end
+
   def new_registration_valid_from
-    return Date.current unless registrations.present?
-    registrations.by_expiry_date.last.valid_till
+    registered_until || Date.current
   end
   
   def to_param

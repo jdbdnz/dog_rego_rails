@@ -16,8 +16,9 @@ class RegistrationsController < ApplicationController
       valid_from: @dog.new_registration_valid_from,
       valid_till: @dog.new_registration_valid_from + months.months
     }
-    if Registration.create registration_params
-      flash[:notice] = "#{@dog.name}'s details have been saved."
+    if @registration = Registration.create(registration_params)
+      flash[:notice] = "#{@dog.name}'s registration has been renewed."
+      RegistrationMailer.registered(@registration).deliver!
       redirect_to user_dog_path(@user,@dog) and return
     else
       flash[:alert] = "Something went wrong. Please try again."

@@ -35,12 +35,13 @@ class DogsController < ApplicationController
       valid = false
       flash[:alert] = "\"#{@dog.name}\" is already registered to you. Did you mean to renew their registration instead?"
     else
-      Registration.create({
+      @registration = Registration.create({
         dog: @dog = Dog.create(dog_params) ,
         valid_from: Date.current,
         valid_till: Date.current.advance(months: registration_period),
         fee: Registration::REGISTRATION_PERIOD_PRICES[registration_period]
       })
+      RegistrationMailer.registered(@registration).deliver if @registration.valid?
       valid = @dog.valid?
     end
     render 'new' and return unless valid

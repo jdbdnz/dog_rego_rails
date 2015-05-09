@@ -2,7 +2,7 @@
   <div class="alert alert-warning">
     <strong>Registration fees for <%= @dog.name %> are owing</strong>
     <p>
-      Please deposit <span class="text-muted"><%= number_to_currency @dog.fees_owing %></span> into account <span class="text-muted">12-1234-1234-01</span> with a reference of <span class="text-muted">#<%= @dog.id %></span> as soon as possible.
+      Please deposit <span class="text-muted"><%= number_to_currency @dog.fees_owing %></span> into account <span class="text-muted"><%= bank_account %></span> with a reference of <span class="text-muted">#<%= @dog.id %></span> as soon as possible.
     </p>
   </div>
 <% end %>
