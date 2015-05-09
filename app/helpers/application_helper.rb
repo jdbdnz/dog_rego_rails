@@ -7,7 +7,13 @@ module ApplicationHelper
   end
 
    def bootstrap_form_for(*params, &block)
-    params[1][:defaults] = { input_html: { class: "form-control" }, label_html: { class: "text-left" }, wrapper_html: {class: "form-group"} }
+    params[1][:defaults] = { input_html: { class: "form-control" }, label_html: { class: "text-left" }, wrapper_html: {class: "form-group clearfix"} }
     simple_form_for(*params, &block)
+  end
+
+  def format_date(date, options = {time: false})
+    format = "%e %b %Y"
+    format += " %l:%M %p" if options[:time] == true
+    date.to_date.strftime(format) 
   end
 end
