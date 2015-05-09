@@ -1,0 +1,67 @@
+<% if @dog.registration_status == Dog::STATUS_PENDING_PAYMENT %>
+  <div class="alert alert-warning">
+    <strong>Registration fees for <%= @dog.name %> are owing</strong>
+    <p>
+      Please deposit <span class="text-muted"><%= number_to_currency @dog.fees_owing %></span> into account <span class="text-muted">12-1234-1234-01</span> with a reference of <span class="text-muted">#<%= @dog.id %></span> as soon as possible.
+    </p>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <h1 class="pull-left">
+      <%= @dog.name %>
+    </h1>
+    <br />
+    <%= link_to "Edit Details", edit_user_dog_path(@user, @dog), class: 'btn btn-default' %>
+  </div>
+</div>
+<h4 class="no-margin">
+  <span class="label label-default">
+    <%= @dog.breed %>
+  </span>
+</h4>
+<br />
+<p>
+  First registered on <%= format_date @dog.created_at %>
+</p>
+<hr />
+<br />
+
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <h3 class="pull-left"><span class="hidden-xs">Registration </span>History</h3>
+    <br />
+    <%= link_to "Renew", edit_user_dog_path(@user, @dog), class: 'btn btn-default' %>
+  </div>
+</div>
+<br />
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>#</th>
+      <th>Valid from</th>
+      <th>Valid Until</th>
+      <th>Fee</th>
+      <th class="text-center">Payment Received</th>
+    </tr>
+    <% @dog.registrations.each do |registration| %>
+      <tr class="<%= "active" if registration.current? %>" >
+        <td><%= registration.id %></td>
+        <td><%= format_date registration.valid_from %></td>
+        <td><%= format_date registration.valid_till %></td>
+        <td><%= number_to_currency registration.fee %></td>
+        <td class="text-center">
+          <% if registration.paid? %>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+
+

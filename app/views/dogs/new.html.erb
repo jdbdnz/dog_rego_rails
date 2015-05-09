@@ -1,0 +1,31 @@
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6">
+    <h2>Register a new dog</h2>
+
+    <%= bootstrap_form_for(@dog, url: user_dogs_path(@dog.owner), html: {  method: :post }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :name %>
+      <%= f.input :breed %>
+      <%= f.input :date_of_birth, as: :date %>
+      <%= f.input :suggested_registration_length, input_html: { name: 'registration_period' }, label: 'Registration Period', allow_blank: false, as: :radio_buttons, collection: Registration::REGISTRATION_PERIOD_PRICES.map {|v,k| ["#{v} Months for $#{k}, valid till #{ format_date(DateTime.current + v.months) }", v] } %>
+      <%= f.button :submit, "Register Now", class: "col-xs-12 btn btn-info" %>
+    <% end %>
+
+  </div>
+  
+  <% if @user.dogs.present? %>
+    <div class="col-xs-12 col-sm-6 text-center">
+      <p class="hidden-xs">
+        <br /><br /><br />
+      </p>
+      <p class="col-xs-12">
+        Has your dog been registered before?
+      </p>
+      <br />
+      <br />
+      <%= link_to "Renew", new_user_registration_path, class: 'btn btn-lg btn-primary'  %>
+    </div>
+  <% end %>
+
+</div>
