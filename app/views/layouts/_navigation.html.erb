@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to root_path, class: 'navbar-brand' do %>
+        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+        Dog Registration Online
+      <% end %>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="<%= 'active' if current_page? user_path(current_user) %>">
+            <%= link_to current_user.name, user_path(current_user) %>
+          </li>
+        </ul>
+      <% else %>
+        <%= bootstrap_form_for(:user, url: user_session_path, :html => { class: 'navbar-form navbar-right', role: 'form' }) do |f| %>
+          <%= f.input :email, placeholder: 'Email' %>
+          <%= f.input :password, placeholder: 'Password'  %>
+          <%= f.button :submit, "Log in", class: 'btn btn-success' %>
+        <% end %>
+      <% end %>
+    </div><!--/.navbar-collapse -->
+  </div>
+</nav>
