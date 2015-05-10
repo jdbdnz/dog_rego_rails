@@ -38,7 +38,7 @@ class DogsController < ApplicationController
       @registration = Registration.create({
         dog: @dog = Dog.create(dog_params) ,
         valid_from: Date.current,
-        valid_till: Date.current.advance(months: registration_period),
+        valid_until: Date.current.advance(months: registration_period),
         fee: Registration::REGISTRATION_PERIOD_PRICES[registration_period]
       })
       RegistrationMailer.registered(@registration).deliver if @registration.valid?

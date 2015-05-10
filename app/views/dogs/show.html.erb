@@ -52,7 +52,7 @@
       <tr class="<%= "active" if registration.current? %>" >
         <td><%= registration.id %></td>
         <td><%= format_date registration.valid_from %></td>
-        <td><%= format_date registration.valid_till %></td>
+        <td><%= format_date registration.valid_until %></td>
         <td><%= number_to_currency registration.fee %></td>
         <td class="text-center">
           <% if registration.paid? %>

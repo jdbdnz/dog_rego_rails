@@ -1,5 +1,5 @@
 <p>Hello <%= @user.name %>,</p>
-<p>This email is to confirm your request to register <%= @dog.name %> until #{ format_date @dog.registered_until }</p>
+<p>This email is to confirm your request to register <%= @dog.name %> until <%= format_date @dog.registered_until  %></p>
 <p>
   <%= number_to_currency @dog.fees_owing %> in registration fees for <%= @dog.name %> is owing.
   <br />

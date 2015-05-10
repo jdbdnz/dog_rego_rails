@@ -47,7 +47,7 @@ class Dog < ActiveRecord::Base
   end
 
   def registered_until
-    registrations.by_expiry_date.last.valid_till if registrations.present? 
+    registrations.by_expiry_date.last.valid_until if registrations.present? 
   end
 
   def new_registration_valid_from

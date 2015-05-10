@@ -3,7 +3,7 @@ FactoryGirl.define do
     dog         { |i| i.association(:dog) }
 
     valid_from (Date.current)
-    valid_till (Date.current + 3.months)
+    valid_until (Date.current + 3.months)
     paid true
 
     factory :payment_pending do
@@ -12,7 +12,7 @@ FactoryGirl.define do
 
     factory :expired_registration do
       valid_from (Date.current - 3.months - 1.day)
-      valid_till (Date.current - 1.day)
+      valid_until (Date.current - 1.day)
     end
     
   end
