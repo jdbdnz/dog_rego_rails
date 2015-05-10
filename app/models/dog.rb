@@ -3,6 +3,8 @@ class Dog < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   has_many :registrations
 
+  before_save :update_url_name
+
   scope :search_query, -> (query) { 
     users = User.arel_table
     query_parts = query.split(/\W+/).map {|part| "%#{part}%" }
@@ -70,7 +72,11 @@ class Dog < ActiveRecord::Base
   end
   
   def to_param
-    name.downcase
+    name.parameterize
+  end
+
+  def update_url_name
+    self.url_name = name.parameterize
   end
 
 end

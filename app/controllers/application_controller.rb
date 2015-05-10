@@ -38,8 +38,7 @@ class ApplicationController < ActionController::Base
   private
 
   def load_dog
-    @dog = @user.dogs.where("lower(dogs.name) = ?", (params[:dog_id] || params[:id]).downcase).first
-    not_found unless @dog
+    @dog = @user.dogs.where("lower(dogs.url_name) = ?", (params[:dog_id] || params[:id]).parameterize).first
     authorize @dog, :admin?
   end
 
