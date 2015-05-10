@@ -1,14 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_user, only: [:show, :destroy]
+  before_filter :custom_authenticate_user!
+  before_filter :load_user, only: [:show, :destroy, :edit]
 
   def index
     authorize :user
     @users = User.all
-
-  end
-
-  def show
   end
 
   def destroy

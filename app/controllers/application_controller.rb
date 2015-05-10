@@ -17,9 +17,9 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-  def authenticate_user!
+  def custom_authenticate_user!
     session[:user_return_to] = request.fullpath
-    super
+    authenticate_user!
   end
   
 

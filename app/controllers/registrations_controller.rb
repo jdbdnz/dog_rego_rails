@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :custom_authenticate_user!
 
   before_filter :load_user
   before_filter :load_dog
