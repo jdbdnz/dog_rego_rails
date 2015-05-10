@@ -7,7 +7,7 @@
       <%= f.error_notification %>
       <%= f.input :name %>
       <%= f.input :breed %>
-      <%= f.input :date_of_birth, as: :date %>
+      <%= f.input :date_of_birth, as: :date, start_year: (DateTime.current.year - 50), end_year: DateTime.current.year %>
       <%= f.input :suggested_registration_length, input_html: { name: 'registration_period' }, label: 'Registration Period', allow_blank: false, as: :radio_buttons, collection: Registration::REGISTRATION_PERIOD_PRICES.map {|v,k| ["#{v} Months for $#{k}, valid until #{ format_date(DateTime.current + v.months) }", v] } %>
       <%= f.button :submit, "Register Now", class: "col-xs-12 btn btn-info" %>
     <% end %>
