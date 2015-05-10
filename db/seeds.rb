@@ -6,13 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-case Rails.env
-when 'development'
-  User.delete_all
-  FactoryGirl.create :admin
-  owner = FactoryGirl.create :owner
-  dog =  FactoryGirl.create :dog, owner: owner
-  FactoryGirl.create :registration, dog_id: dog.id
-  FactoryGirl.create :registration_payment_pending, dog_id: dog.id
-  FactoryGirl.create :expired_registration, dog_id: dog.id
-end
+User.delete_all
+FactoryGirl.create :admin
+owner = FactoryGirl.create :owner
+dog =  FactoryGirl.create :dog, owner: owner
+FactoryGirl.create :registration, dog_id: dog.id
+FactoryGirl.create :registration_payment_pending, dog_id: dog.id
+FactoryGirl.create :expired_registration, dog_id: dog.id
