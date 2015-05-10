@@ -36,7 +36,6 @@ gem 'devise'
 gem 'simple_form'
 
 # I developed Nofly to make notification abstraction easy
-#gem 'nofly', path: '../gems/nofly'
 gem 'nofly', github: 'jdbdnz/nofly'
 
 

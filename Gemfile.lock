@@ -1,5 +1,6 @@
-PATH
-  remote: ../gems/nofly
+GIT
+  remote: git://github.com/jdbdnz/nofly.git
+  revision: 7c48faef0cda917c6a09a0f6893e14fa688737fd
   specs:
     nofly (0.0.2)
 
