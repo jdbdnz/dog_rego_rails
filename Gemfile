@@ -57,12 +57,13 @@ gem 'modernizr-rails', '~> 2.7.1'
 
 gem 'redcarpet'
 
+gem "factory_girl_rails"
+
 group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails'
-  gem "factory_girl_rails"
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
