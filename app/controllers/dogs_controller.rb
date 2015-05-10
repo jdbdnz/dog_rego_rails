@@ -2,7 +2,7 @@ class DogsController < ApplicationController
   before_filter :authenticate_user!
 
   before_filter :load_user
-  before_filter :load_dog, only: [:show, :edit, :update]
+  before_filter :load_dog, only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -47,6 +47,13 @@ class DogsController < ApplicationController
     render 'new' and return unless valid
     flash[:notice] = "Success! \"#{@dog.name}\" has been registered for the next #{registration_period} months. Please follow payment instructions below."
     redirect_to user_dog_path(@user,@dog)
+  end
+
+  def destroy
+    @dog.registrations.destroy_all
+    @dog.destroy
+    flash[:alert] = "All records of #{@dog.name} has been deleted"
+    redirect_to user_path(@user) and return
   end
 
 end

@@ -14,6 +14,8 @@
     </h1>
     <br />
     <%= link_to "Edit Details", edit_user_dog_path(@user, @dog), class: 'btn btn-default' %>
+    <br /><br />
+    <%= link_to "Delete Dog", user_dog_path(@user, @dog), data: { confirm: "Are you sure you want to delete this dog?" }, method: :delete %></p>
   </div>
 </div>
 <h4 class="no-margin">
