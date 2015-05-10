@@ -9,8 +9,10 @@ class UsersController < ApplicationController
 
   def destroy
     sign_out @user
-    @user.registrations.destroy_all
-    @user.dogs.destroy_all
+    @user.dogs.map do |dog| 
+      dog.registrations.destroy_all
+      dog.destroy
+    end
     @user.destroy
     flash[:alert] = "Account has been deleted"
     redirect_to root_path and return
