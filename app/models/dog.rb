@@ -3,7 +3,7 @@ class Dog < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   has_many :registrations
 
-  before_save :update_url_name
+  before_validation :update_url_name
 
   scope :search_query, -> (query) { 
     users = User.arel_table
