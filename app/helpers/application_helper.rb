@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def markdown(markdowned_string)
+    # easy implimentation wrapper for markdown. Uses erb utility to escape any html in the string the uses redcarpet to render the markdown as html
+    renderer = Redcarpet::Render::HTML.new(no_links: false, hard_wrap: true)
+    Redcarpet::Markdown.new(renderer, extensions = {}).render(
+      ERB::Util::h(markdowned_string)
+    ).html_safe
+  end
+
   def bank_account
     "12-1234-1234-01"
   end

@@ -55,6 +55,8 @@ gem 'autoprefixer-rails'
 # backwards compatibility of modern web standards
 gem 'modernizr-rails', '~> 2.7.1'
 
+gem 'redcarpet'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
