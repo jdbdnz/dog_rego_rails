@@ -7,22 +7,25 @@
   </div>
 <% end %>
 
-<div class="row">
-  <div class="col-xs-12 text-right">
+<div class="row text-right">
+  <div class="col-xs-12">
     <h1 class="pull-left">
       <%= @dog.name %>
     </h1>
     <br />
     <%= link_to "Edit Details", edit_user_dog_path(@user, @dog), class: 'btn btn-default' %>
-    <br /><br />
+  </div>
+
+  <div class="col-xs-12">
+    <h4 class="no-margin pull-left">
+      <span class="label label-default">
+        <%= @dog.breed %>
+      </span>
+    </h4>
     <%= link_to "Delete Dog", user_dog_path(@user, @dog), data: { confirm: "Are you sure you want to delete this dog?" }, method: :delete %></p>
   </div>
 </div>
-<h4 class="no-margin">
-  <span class="label label-default">
-    <%= @dog.breed %>
-  </span>
-</h4>
+
 <br />
 <p>
   Born <%= format_date @dog.date_of_birth %>, <%= @dog.age %> years old
@@ -41,32 +44,5 @@
   </div>
 </div>
 <br />
-<div class="table-responsive">
-  <table class="table">
-    <tr>
-      <th>#</th>
-      <th>Valid from</th>
-      <th>Valid Until</th>
-      <th>Fee</th>
-      <th class="text-center">Payment Received</th>
-    </tr>
-    <% @dog.registrations.by_expiry_date.reverse.each do |registration| %>
-      <tr class="<%= "active" if registration.current? %>" >
-        <td><%= registration.id %></td>
-        <td><%= format_date registration.valid_from %></td>
-        <td><%= format_date registration.valid_until %></td>
-        <td><%= number_to_currency registration.fee %></td>
-        <td class="text-center">
-          <% if registration.paid? %>
-            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-          <% else %>
-            <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-</div>
 
-
-
+<%= render partial: 'registrations/list', locals: { dog: @dog } %>

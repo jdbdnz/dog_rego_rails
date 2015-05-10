@@ -4,15 +4,8 @@ class DogsController < ApplicationController
   before_filter :load_user
   before_filter :load_dog, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @dogs = @user.dogs
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   def update
@@ -41,7 +34,7 @@ class DogsController < ApplicationController
         valid_until: Date.current.advance(months: registration_period),
         fee: Registration::REGISTRATION_PERIOD_PRICES[registration_period]
       })
-      Nofly.for(@registration).registered if @registration.valid?
+      Nofly.for(@registration).created if @registration.valid?
       valid = @dog.valid?
     end
     render 'new' and return unless valid

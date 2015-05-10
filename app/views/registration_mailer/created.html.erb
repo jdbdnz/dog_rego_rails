@@ -1,12 +1,8 @@
-<p>Hello <%= @user.name %>,</p>
+<%= render 'mailer_header' %>
 <p>This email is to confirm your request to register <%= @dog.name %> until <%= format_date @dog.registered_until  %></p>
 <p>
   <%= number_to_currency @dog.fees_owing %> in registration fees for <%= @dog.name %> is owing.
   <br />
   Please make a deposit into <%= bank_account %> with a reference of #<%= @dog.id %> as soon as possible.
 </p>
-<p>
-  Thank you,
-  <br />
-  Dog Registration Online
-</p>
+<%= render 'mailer_footer' %>

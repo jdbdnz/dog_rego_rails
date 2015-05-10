@@ -1,7 +1,12 @@
 class RegistrationNofly < Nofly::EventLibrary
-  def registered
+  
+  def created
     #send email to owner confirming their dog's registration
-    RegistrationMailer.registered(registration).deliver_now!
+    RegistrationMailer.created(registration).deliver_now!
+  end
+
+  def paid
+    RegistrationMailer.paid(registration).deliver_now!
   end
 
 end

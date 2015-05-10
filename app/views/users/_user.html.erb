@@ -1,0 +1,20 @@
+<tr>
+  
+  <% [
+      user.id, 
+      user.name,
+      (user.fees_owing? ? number_to_currency(user.fees_owing, precision: 0).to_s : '-')
+    ].each do |attribute| %>
+    <td><%= link_to attribute, user_path(user) %></td>
+  <% end %>
+
+  <td>
+    <%= markdown user.dogs.map{ |dog| 
+          "[#{dog.name}](#{user_dog_path(user,dog)})" +
+          ( dog.current_registration? ? ', registered until ' : ', registration_expired ' ) +
+          ( format_date dog.registered_until ) +
+          ( dog.fees_owing? ? ", #{number_to_currency dog.fees_owing, precision: 0} owing" : '')        
+      }.join("\n")  %>
+  </td>
+
+</tr>

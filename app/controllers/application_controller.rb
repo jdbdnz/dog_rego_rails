@@ -13,12 +13,8 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    flash[:notice] = "You do not have permission to view that page"
-    unless current_user
-      authenticate_user!
-    else
-      redirect_to root_url
-    end
+    flash[:alert] = "You do not have permission to view that page"
+    redirect_to root_url
   end
 
   def authenticate_user!
@@ -44,10 +40,17 @@ class ApplicationController < ActionController::Base
   def load_dog
     @dog = @user.dogs.where("lower(dogs.name) = ?", (params[:dog_id] || params[:id]).downcase).first
     not_found unless @dog
+    authorize @dog, :admin?
   end
 
   def load_user
     @user = User.find(params[:user_id] || params[:id])
+    authorize @user, :admin?
+  end
+
+  def load_registration
+    @registration = Registration.find(params[:registration_id] || params[:id])
+    authorize @registration, :admin?
   end
 
 

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :destroy] do
     resources :dogs, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
-      resources :registrations, only: [:new, :create]
+      resources :registrations, only: [:new, :create] do
+        put 'paid'
+      end
     end
   end
 end

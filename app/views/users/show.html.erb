@@ -28,25 +28,4 @@
 </div>
 <br />
 
-<div class="table-responsive">
-  <table class="table table-striped">
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Age</th>
-      <th class="text-center">Registered</th>
-    </tr>
-    <% @user.dogs.each do |dog| %>
-      <tr>
-        <td><%= link_to dog.id, user_dog_path(@user, dog) %></td>
-        <td><%= link_to dog.name, user_dog_path(@user, dog)  %></td>
-        <td><%= dog.age %></td>
-        <td class="text-center">
-          <a class="glyphicon <%= dog_status_glyphicon dog %> text-success" data-trigger="hover" aria-hidden="true"  data-container="body" data-toggle="popover" data-placement="left" data-content="<%= dog.registration_status %>"></a>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-</div>
-
-
+<%= render partial: 'dogs/list', locals: { dogs: @user.dogs } %>

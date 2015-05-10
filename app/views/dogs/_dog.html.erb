@@ -1,0 +1,11 @@
+<tr>
+  <td><%= link_to dog.id, user_dog_path(dog.owner, dog) %></td>
+  <td><%= link_to dog.name, user_dog_path(dog.owner, dog)  %></td>
+  <td><%= dog.age %></td>
+  <td class="text-center">
+    <a class="glyphicon <%= dog_status_glyphicon dog %> text-success" data-trigger="hover" aria-hidden="true"  data-container="body" data-toggle="popover" data-placement="left" data-content="<%= dog.registration_status %>"></a>
+  </td>
+  <td>
+    <%= dog.fees_owing? ? number_to_currency(dog.fees_owing, precision: 0).to_s : '-' %>
+  </td>
+</tr>

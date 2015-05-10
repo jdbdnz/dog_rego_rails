@@ -3,6 +3,17 @@ class Dog < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   has_many :registrations
 
+  scope :search_query, -> (query) { 
+    users = User.arel_table
+    query_parts = query.split(/\W+/).map {|part| "%#{part}%" }
+
+    where (
+      users[:name].matches_any(query_parts)
+    ).or (
+      users[:breed].matches_any(query_parts)
+    )
+  }
+
   validates_presence_of :name, :owner_id, :breed, :date_of_birth
   validates_uniqueness_of :name, scope: :owner_id, case_sensitive: false
 
@@ -44,6 +55,10 @@ class Dog < ActiveRecord::Base
 
   def fees_owing
     registrations.unpaid.map(&:fee).sum
+  end
+
+  def fees_owing?
+    fees_owing > 0
   end
 
   def registered_until

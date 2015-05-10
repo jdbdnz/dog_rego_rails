@@ -15,6 +15,11 @@
     <div id="navbar" class="navbar-collapse collapse">
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
+          <% if policy(:user).index? %>
+            <li>
+              <%= link_to "Admin", users_path %>
+            </li>
+          <% end %>
           <li class="<%= 'active' if current_page? user_path(current_user) %>">
             <%= link_to current_user.name, user_path(current_user) %>
           </li>

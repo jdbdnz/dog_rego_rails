@@ -1,0 +1,12 @@
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>#</th>
+      <th>Valid from</th>
+      <th>Valid Until</th>
+      <th>Fee</th>
+      <th class="text-center">Payment Received</th>
+    </tr>
+    <%= render dog.registrations.by_expiry_date.reverse %>
+  </table>
+</div>

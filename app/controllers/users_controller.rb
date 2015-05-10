@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_filter :load_user, only: [:show, :destroy]
 
   def index
+    authorize :user
+    @users = User.all
 
   end
 

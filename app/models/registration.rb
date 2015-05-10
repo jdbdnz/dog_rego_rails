@@ -1,5 +1,4 @@
 class Registration < ActiveRecord::Base
-  
   belongs_to :dog
   delegate :owner, :name, :breed, :date_of_birth, to: :dog
 
@@ -24,6 +23,15 @@ class Registration < ActiveRecord::Base
     else
       3
     end
+  end
+
+  def paid!
+    self.paid = true
+    save
+  end
+
+  def self.fee_for_months(months)
+    REGISTRATION_PERIOD_PRICES[months]
   end
 
 end
