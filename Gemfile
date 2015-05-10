@@ -35,8 +35,9 @@ gem 'devise'
 # Simple form makes forms simple!
 gem 'simple_form'
 
-# Gem I developed myself to make notification abstraction easy
-gem 'nofly', path: '../gems/nofly'
+# I developed Nofly to make notification abstraction easy
+#gem 'nofly', path: '../gems/nofly'
+gem 'nofly', github: 'jdbdnz/nofly'
 
 
 # Use ActiveModel has_secure_password

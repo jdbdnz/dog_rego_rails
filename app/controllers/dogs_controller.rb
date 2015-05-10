@@ -41,7 +41,7 @@ class DogsController < ApplicationController
         valid_until: Date.current.advance(months: registration_period),
         fee: Registration::REGISTRATION_PERIOD_PRICES[registration_period]
       })
-      RegistrationMailer.registered(@registration).deliver if @registration.valid?
+      Nofly.for(@registration).registered if @registration.valid?
       valid = @dog.valid?
     end
     render 'new' and return unless valid

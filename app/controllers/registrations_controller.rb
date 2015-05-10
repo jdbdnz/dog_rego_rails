@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
     }
     if @registration = Registration.create(registration_params)
       flash[:notice] = "#{@dog.name}'s registration has been renewed."
-      RegistrationMailer.registered(@registration).deliver!
+      Nofly.for(@registration).registered if @registration.valid?
       redirect_to user_dog_path(@user,@dog) and return
     else
       flash[:alert] = "Something went wrong. Please try again."
